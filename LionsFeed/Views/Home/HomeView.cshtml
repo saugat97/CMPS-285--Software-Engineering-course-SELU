@@ -1,0 +1,277 @@
+﻿@model LionsFeed.ViewModel.Posts.PostViewModel
+@{
+    ViewData["Title"] = "HomeView";
+}
+
+@await Html.PartialAsync("LeftBar")
+
+<div class="col-md-7" style="padding-top:20px;">
+    @await Html.PartialAsync("Create")
+
+    <div class="col-md-12" style="padding:0px; padding-top:20px; background-color: #ececec; border-radius:5px">
+        <ul style="list-style: none; padding-left:0px">
+            @foreach (var Post in Model.Posts)
+            {
+                <li>
+
+                    <div class="col-md-12">
+                        <div class="col-md-10" style="padding:0px">
+                            <div style="width:40px" class="pull-left">
+                                <a asp-controller="Manage" asp-action="Medium" asp-route-id="@Post.ID">
+                                    <img style="border-radius:50%;" src="@Post.Artist.ImageUrl" height="35" width="35" />
+                                </a>
+                            </div>
+                            <div class="pull-left">
+                                <div style="padding:0px; margin-bottom:0px">
+                                    <a asp-controller="Manage" asp-action="Medium" asp-route-id="@Post.ID" style="color:black">
+                                        <strong>@Post.Artist.FirstName</strong>
+                                    </a>
+
+
+
+
+
+                                    <div style="font-size:x-small; color:gray">
+                                        <p>
+                                            <span class="glyphicon glyphicon-plus-sign"></span>
+                                            @Post.CreatedDate.ToShortDateString()
+                                            &nbsp;
+                                            @Post.CreatedDate.ToShortTimeString()
+                                        </p>
+
+
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="col-md-2">
+                            <button data-post-id="@Post.ID" onclick="style.display = 'none'" class="btn btn-flag js-toggle-flag">
+
+                                <img src="~/images/flag.png" style="height:18px; width:18px; border:none; ">
+                            </button>
+                        </div>
+
+
+                    </div>
+                    @if (!((Post.PostText == "") || (Post.PostText == null)))
+                    {
+                        <div class="col-md-11" style="margin-left:50px; padding:0px">
+                            <div class="col-md-12" style="border: 1px solid #129019;
+                                border-radius:5px; padding:20px; width:90%;
+                                background-color:#ffffff">
+
+
+                                <div class="col-md-12" style="word-break: break-all">
+                                    @Post.PostText
+                                </div>
+
+
+                            </div>
+                        </div>
+                    }
+                    @if (!String.IsNullOrEmpty(Post.ImageUrl))
+                    {
+                        <div class="col-md-11" style="padding:0px">
+
+                            <div class="col-md-12" style="margin-left:45px ;height:400px;overflow:hidden;position:relative; padding:0px; width:90%">
+
+
+                                <img style="
+                                    position:absolute;
+                                    height:100%;
+                                    width:100%;
+                                    object-fit:cover;
+                                    border:1px solid #ddd;
+                                    border-radius:5px;
+                                    padding:5px;
+                                    "
+                                     src="@Post.ImageUrl" />
+
+
+                            </div>
+                        </div>
+
+                    }
+
+                    @{
+                        var x = "Like";
+                        if (Post.LikeCount > 1)
+                        {
+                            x = "Likes";
+                        }
+                    }
+
+                    @{
+                        var y = "Like";
+                        if (Post.IsLiked)
+                        {
+                            y = "Unlike";
+                        }
+                    }
+
+                    @*<div class="container" style="padding:5px 0px; width:85%;">
+                        <button id="buttonName" data-post-id="@Post.ID" class="btn btn-link btn-sm js-toggle-upvote"><span class="glyphicon glyphicon-thumbs-up" style="margin-right:3px"></span>@y</button>
+
+                        <button class="btn btn-link btn-sm js-toggle-upvote"><span class="glyphicon glyphicon-comment" style="margin-right:3px"></span>Comment</button>
+
+                        <button class="btn btn-link btn-sm "><span class="glyphicon glyphicon-share" style="margin-right:3px"></span>Share</button>
+                        <div>
+                            <span id="@("NumLikes"+Post.ID)">@Post.LikeCount </span>
+
+                            <span id="@("pluralLike"+Post.ID)"> @x</span>
+                        </div>*@
+
+                    <div class="container" style="padding:5px 0px; width:85%;">
+
+                        <span id="@("NumLikes"+Post.ID)">@Post.LikeCount </span>
+
+                        <span id="@("pluralLike"+Post.ID)"> @x</span>
+                        <br />
+
+
+                        <button id="buttonName" data-post-id="@Post.ID" class="btn btn-link btn-sm js-toggle-upvote">@y</button>
+                        @*@if (!Model.IsFlagged)
+                            {*@
+                        @*<button class="btn btn-link btn-sm js-toggle-upvote"><span class="glyphicon glyphicon-comment" style="margin-right:3px"></span>Comment</button>*@
+
+                        <a asp-area="" asp-controller="Comments" asp-action="Create" asp-route-id="@Post.ID" class="btn btn-link">Comment(@Post.CommentsCount)</a>
+
+                        <button class="btn btn-link btn-sm "><span class="glyphicon glyphicon-share" style="margin-right:3px"></span>Share</button>
+                        @*}
+                            else
+                            {
+                                <button data-post-id="@Post.ID" class="btn btn-danger js-toggle-flag">Report</button>
+                            }*@
+
+                    </div>
+
+                    <div>
+                        <br />
+
+                        <div class="col-md-12" style="height:3.5px; width:100%; background-color:white; padding:0px">
+                        </div>
+                        <br />
+
+                    </div>
+
+                </li>
+            }
+        </ul>
+    </div>
+
+    @section scripts
+        {
+        <script>
+            $(document).ready(function () {
+
+                $(".js-toggle-upvote").click(function (e) {
+
+                    var button = $(e.target);
+                    var x = "Like";
+
+                    if (button.html() == "Like") {
+
+                        $.post("/api/upvotes/upvote", { postId: button.attr("data-post-id") })
+
+                            .done(function (result) {
+
+                                //likePost = false;
+
+                                button
+                                    //.removeClass("btn-link")
+                                    //.addClass("btn-default")
+                                    .text("Unlike");
+
+                                var nameLike = '#pluralLike' + result.id;
+
+                                if (result.likeCount > 1) {
+                                    x = "Likes";
+                                }
+
+                                $(nameLike).html(x);
+
+                                var numId = '#NumLikes' + result.id;
+
+                                $(numId).html(result.likeCount);
+
+                            })
+
+                            .fail(function () {
+                                alert("Something failed!");
+                            });
+
+                    }
+                    else {
+                        $.post("/api/upvotes/downvote", { postId: button.attr("data-post-id") })
+
+                            .done(function (result) {
+
+                                //likePost = true;
+
+                                button
+                                    //.removeClass("btn-link")
+                                    //.addClass("btn-default")
+                                    .text("Like");
+
+                                var nameLike = '#pluralLike' + result.id;
+
+                                if (result.likeCount > 1) {
+                                    x = "Likes";
+                                }
+                                else {
+                                    x = "Like";
+
+                                }
+
+                                $(nameLike).html(x);
+
+                                var numId = '#NumLikes' + result.id;
+
+                                $(numId).html(result.likeCount);
+                            })
+
+                            .fail(function () {
+                                alert("Something failed!");
+                            });
+
+                    }
+                });
+
+
+
+                $(".js-toggle-flag").click(function (e) {
+
+                    var button2 = $(e.target);
+
+                    //if ($(".js-toggle-flag").hasClass("btn-default")) {
+
+
+                    $.post("/api/Flags", { postId: button2.attr("data-post-id") })
+
+                        .done(function () {
+                            button2
+                                .removeClass("btn-default")
+                                .addClass("btn-danger")
+
+                        })
+                        .fail(function () {
+                            alert("Something failed!");
+                        });
+                });
+            });
+
+
+        </script>
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/tilt.js/1.2.1/tilt.jquery.min.js"></script>
+
+
+        <script type="text/javascript">
+            $('.southeastern-logo').tilt({                                         /*Cool Tilt effect on SELU Logo*/
+                glare: true,
+                maxGlare: .5
+                /**/
+            });
+        </script>
+    }
+

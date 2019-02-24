@@ -1,0 +1,253 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - LionsFeed</title>
+
+    <environment include="Development">
+        <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css" />
+        <link rel="stylesheet" href="~/css/StyleSheet.css" />
+        <link rel="stylesheet" href="~/css/animate.css" />
+    </environment>
+    <environment exclude="Development">
+        <link rel="stylesheet" href="https://ajax.aspnetcdn.com/ajax/bootstrap/3.3.7/css/bootstrap.min.css"
+              asp-fallback-href="~/lib/bootstrap/dist/css/bootstrap.min.css"
+              asp-fallback-test-class="sr-only" asp-fallback-test-property="position" asp-fallback-test-value="absolute" />
+        <link rel="stylesheet" href="~/css/site.min.css" asp-append-version="true" />
+    </environment>
+</head>
+<body class="container">
+    <nav class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container" style="height:80px">
+
+            <div class="navbar-header" style="float-left; padding-left:2%">
+
+                <a asp-area="" asp-controller="Home" asp-action="Index" class="navbar-brand" style="float-left"><h1 style="font-family: 'Goudy Old Style'; font-size: 50px; padding-top:0; margin-top:0;">LionsFeed</h1></a>
+            </div>
+
+            <div class="dropdown navbar-right">
+
+                @{
+                    if (User.IsInRole("Admin") || User.IsInRole("User"))
+                    {
+                        <a href="#" style="color:white; position:relative">
+                            <i class="glyphicon glyphicon-globe notifications" style="top:15px; font-size: 1.5em"></i>
+                            <span class="badge js-notifications-count hidden"
+                                  style="position:absolute; top:0px; left:15px; background:#a80a0a">
+                            </span>
+                        </a>
+
+                    }
+                }
+                @{
+                    var disp = "";
+                    if (User.IsInRole("Admin") || User.IsInRole("User"))
+                    {
+                        disp = "Account";
+
+                    }
+                    else
+                    {
+                        disp = "Sign In";
+
+                    }
+                }
+                <button class="btn btn-lg btn-link dropdown-toggle " type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="margin-top: 22px; margin-right:10px; font-size:20px">
+                    @disp<span class="caret"></span>
+
+
+                </button>
+
+                <ul class=" dropdown-menu" aria-labelledby="dropdownMenuButton">
+                    @if (User.IsInRole("Admin") || User.IsInRole("User"))
+                    {
+                        <li>
+                            <a class="dropdown-item" asp-area="" asp-controller="Manage" asp-action="Profile">My Profile</a>
+                        </li>
+                    }
+                    <li>
+                        <a class="dropdown-item" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
+                    </li>
+                    <li>
+                        <a class="dropdown-item" asp-area="" asp-controller="Home" asp-action="About">About</a>
+                    </li>
+                    <li>
+                        <a class="dropdown-item" style="text-align:left" asp-area="" asp-controller="Home" asp-action="Contact">Contact</a>
+                    </li>
+
+                    @if (User.IsInRole("Admin"))
+                    {
+                        <li>
+                            <a class="dropdown-item" asp-area="" asp-controller="ApplicationUsers" asp-action="Index">Users</a>
+                        </li>
+                    }
+                    <li><hr style="margin-top: 0px; margin-bottom: 0px" /></li>
+                    <li>
+                        @if (User.IsInRole("Admin") || User.IsInRole("User"))
+                        {
+                            <form asp-controller="Account" asp-action="Logout" method="post">
+                                <ul style="list-style: none ; padding-left:10px">
+                                    <li style="text-align:left">
+                                        <button type="submit" class="btn btn-link">Logout</button>
+                                    </li>
+                                </ul>
+                            </form>
+                        }
+                        else
+                        {
+                            <ul style="list-style: none; padding-left:20px; padding-top:5px">
+                                <li style="text-align:left">
+                                    <a class="dropdown-item login" asp-area="" asp-controller="Account" asp-action="Login">Login</a>
+                                </li>
+                            </ul>
+                        }
+                    </li>
+
+                </ul>
+
+            </div>
+        </div>
+    </nav>
+    <div class="container-fluid" style="padding-top:50px; margin-left:0px; margin-right:0px">
+        @RenderBody()
+        <div class="col-md-12">
+            <hr style="width:100%" />
+            <footer>
+
+                <p>&copy; 2018 - LionsFeed</p>
+
+            </footer>
+        </div>
+    </div>
+
+    <environment include="Development">
+        <script src="~/lib/jquery/dist/jquery.js"></script>
+        <script src="~/lib/bootstrap/dist/js/bootstrap.js"></script>
+        <script src="~/js/site.js" asp-append-version="true"></script>
+        <script src="~/js/underscore.js"></script>
+        <script src="~/js/moment.js" asp-append-version="true"></script>
+
+
+    </environment>
+    <environment exclude="Development">
+        <script src="https://ajax.aspnetcdn.com/ajax/jquery/jquery-2.2.0.min.js"
+                asp-fallback-src="~/lib/jquery/dist/jquery.min.js"
+                asp-fallback-test="window.jQuery"
+                crossorigin="anonymous"
+                integrity="sha384-K+ctZQ+LL8q6tP7I94W+qzQsfRV2a+AfHIi9k8z8l9ggpc8X+Ytst4yBo/hH+8Fk">
+        </script>
+        <script src="https://ajax.aspnetcdn.com/ajax/bootstrap/3.3.7/bootstrap.min.js"
+                asp-fallback-src="~/lib/bootstrap/dist/js/bootstrap.min.js"
+                asp-fallback-test="window.jQuery && window.jQuery.fn && window.jQuery.fn.modal"
+                crossorigin="anonymous"
+                integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa">
+        </script>
+        <script src="~/js/site.min.js" asp-append-version="true"></script>
+        <script src="https://unpkg.com/tilt.js@1.2.1/dest/tilt.jquery.min.js" asp-append-version="true"></script>
+
+    </environment>
+
+    @RenderSection("Scripts", required: false)
+    <script type="text/x-template" id="notifications-template">
+        <ul style="padding-left:0px; width:270px">
+            <%
+            _.each(notifications, function(notification){
+
+            if(notification.type==1){ %>
+
+            <li style="color:black; list-style:none">
+                <a href="/Comments/Create/<%- notification.post.id %>" @*asp-controller="Comments" asp-action="Create" asp-route-id="<%- notification.post.id %>"*@
+                   style="text-decoration: none;
+                                     display: block;
+                                     width: 100%;
+                                     height: 100%;
+                                     word-break: break-all"
+                   data-html="true">
+                    <%= notification.actor.name%> liked your post.
+                </a>
+                <hr />
+            </li>
+            <%
+            }
+            if(notification.type==2){ %>
+
+            <li style="color:black; list-style:none">
+                <a href="/Comments/Create/<%- notification.post.id %>"
+                   style="text-decoration: none;
+                                     display: block;
+                                     width: 100%;
+                                     height: 100%;" data-html="true">
+                    <%= notification.actor.name%> commented on your post.
+                </a>
+            </li>
+            <%
+            }
+            @*if(notification.type==4){ %>
+
+            <li style="color:black; list-style:none">
+                <a href="/Comments/Create/<%- notification.post.id %>"
+                   style="text-decoration: none;
+                                     display: block;
+                                     width: 100%;
+                                     height: 100%;" data-html="true">
+                    2 users have reported this post.
+                </a>
+            </li>
+            <%
+            }
+            if(notification.type==5){ %>
+
+            <li style="color:black; list-style:none">
+                <a href="/Comments/Create/<%- notification.post.id %>"
+                   style="text-decoration: none;
+                                     display: block;
+                                     width: 100%;
+                                     height: 100%;" data-html="true">
+                    3 users have reported this post.
+                </a>
+            </li>*@
+            })
+            %>
+        </ul>
+
+    </script>
+    <script>
+        debugger
+        $(document).ready(function () {
+            $.getJSON("/api/notifications/getNotifications", function (notifications) {
+                if (notifications.length != 0) {
+                    $(".js-notifications-count")
+                        .text(notifications.length)
+                        .removeClass("hidden")
+                        .addClass("animated bounceInDown");
+
+                    $(".notifications").popover({
+                        html: true,
+                        title: "Notifications",
+                        content: function () {
+                            var compiled = _.template($("#notifications-template").html());
+                            return compiled({ notifications: notifications });
+
+                        },
+                        placement: "bottom"
+                    }).on("shown.bs.popover", function () {
+                        $.post("/api/notifications/markAsRead")
+                            .done(function () {
+                                $(".js-notifications-count")
+                                    .text("")
+                                    .addClass("hidden");
+
+                            });
+
+                    });
+                }
+
+            });
+
+            $(".popover-title").css('color', '#000000');
+
+        });
+    </script>
+</body>
+</html>

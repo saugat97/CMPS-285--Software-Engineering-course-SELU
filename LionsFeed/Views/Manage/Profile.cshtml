@@ -1,0 +1,58 @@
+﻿@model LionsFeed.ViewModel.Manage.ProfileViewModel
+@{
+    ViewData["Title"] = "Profile";
+
+}
+
+@await Html.PartialAsync("LeftBar")
+
+<h1 style="margin-bottom:0px">@ViewData["Title"]</h1>
+
+@if (Model.Email == Model.LoggedInUserEmail)
+{
+    <a asp-area="" asp-controller="Manage" asp-action="EditProfile" style="text-decoration:underline; color:#3970cf; font-size:medium; font-style:italic">Edit your profile</a>
+}
+
+<div class="row">
+    <div class="col-md-6">
+        <div style="width:400px; height:400px;overflow:hidden;position:relative; margin-top:20px">
+
+            <img style="
+                    position:absolute;
+                    height:100%;
+                    width:100%;
+                    object-fit:cover;
+                    border:1px solid #ddd;
+                    border-radius:5px;
+                    padding:5px;"
+                 src="@Model.ImageUrl" />
+
+        </div>
+        <br /><br />
+
+        <div class="col-md-7" style="border:solid green 1px; border-radius:4px; background-color:transparent; padding:5px 0px 0px 10px">
+            <p><strong>@Model.Name.ToUpper()</strong></p>
+        </div>
+
+        <div class="col-md-7" style="border:solid green 1px; border-radius:4px; background-color:transparent; padding:5px 10px">
+
+            <span class="glyphicon glyphicon-envelope"></span>
+            @Model.Email
+        </div>
+
+        @if (Model.PhoneNumber != null)
+        {
+            <div class="col-md-7" style="border:solid green 1px; border-radius:4px; background-color:transparent; padding:5px 10px">
+                <span class="glyphicon glyphicon-phone"></span>
+                @Model.PhoneNumber
+            </div>
+        }
+        @*<button type="submit" class="btn btn-default">Save</button>*@
+        @*<div class="col-md-7" style="margin-top:20px; text-decoration:underline">
+                <a asp-controller="Home" asp-action="HomeView">Back to Home</a>
+            </div>*@
+    </div>
+
+    @section Scripts {
+        @await Html.PartialAsync("_ValidationScriptsPartial")
+    }

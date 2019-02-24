@@ -1,0 +1,46 @@
+﻿@model LionsFeed.ViewModel.Account.RegisterViewModel
+@{
+    ViewData["Title"] = "Register";
+}
+
+<h2>Register</h2>
+
+<div class="row">
+    <div col-md-4>
+        <form asp-action="Register" method="post">
+            <h4>Create a new account.</h4>
+            <hr />
+
+            <div class="form-group">
+                <label asp-for="FirstName"></label>
+                <input asp-for="FirstName" class="form-control" />
+                <span asp-validation-for="FirstName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="LastName"></label>
+                <input asp-for="LastName" class="form-control" />
+                <span asp-validation-for="LastName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="WNumber"></label>
+                <input asp-for="WNumber" class="form-control" />
+                <span asp-validation-for="WNumber" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Gender"></label>
+                <select class="form-control">
+                    <option value="Others">I don't want to specify</option>
+                    <option value="Male">Male</option>
+                    <option value="Female">Female</option>
+                </select>
+            </div>
+            <button type="submit" class="btn btn-default">Register</button>
+
+        </form>
+    </div>
+</div>
+
+@section Scripts{
+    @await Html.PartialAsync("_ValidationScriptsPartial")
+}
+

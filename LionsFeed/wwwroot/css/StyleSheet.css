@@ -1,0 +1,175 @@
+﻿
+body {
+    padding-top: 50px;
+    padding-bottom: 20px;
+    background-image: url(../Images/bg.jpg);
+    background-attachment: fixed;
+    background-size: cover;
+}
+
+/* Wrapping element */
+/* Set some basic padding to keep content from hitting the edges */
+.body-content {
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+/* Carousel */
+.carousel-caption p {
+    font-size: 20px;
+    line-height: 1.4;
+}
+
+/* Make .svg files in the carousel display properly in older browsers */
+.carousel-inner .item img[src$=".svg"] {
+    width: 100%;
+}
+
+/* QR code generator */
+#qrCode {
+    margin: 15px;
+}
+
+/* Hide/rearrange for smaller screens */
+@media screen and (max-width: 767px) {
+    /* Hide captions */
+    .carousel-caption {
+        display: none;
+    }
+}
+
+/*Override Default*/
+
+
+.navbar {
+    background-color: transparent;
+    background: #2C814D;
+    border-color: transparent;
+    /*5cb85c*/
+}
+
+.navbar-inverse .navbar-brand:hover, .navbar-inverse .navbar-brand:focus {
+    background-color: #fff;
+}
+
+.navbar li {
+    color: #fff
+}
+
+.navbar-inverse .navbar-brand {
+    color: #fff;
+}
+
+    .navbar-inverse .navbar-brand:hover, .navbar-inverse .navbar-brand:focus {
+        color: #fff;
+        background-color: #fff;
+    }
+
+.navbar-brand {
+    float: left;
+    padding: 15px 15px;
+    font-size: 40px;
+    line-height: 20px;
+    font-family: 'Facebook Letter Faces'
+}
+/*.navbar > .container .navbar-brand, .navbar > .container-fluid .navbar-brand {
+    margin-left: -350px;
+}*/
+.dropdown-menu > li > a:hover, .dropdown-menu > li > a:focus {
+    background-color: #2C814D;
+}
+
+.dropdown-menu {
+    background-color: #2C814D;
+}
+
+.navbar-inverse .btn-link {
+    color: #fff;
+}
+
+.btn-link:hover, .btn-link:focus {
+    color: grey;
+    text-decoration: none;
+    background-color: #2C814D;
+}
+
+a {
+    color: #31708f;
+}
+
+    a:hover, a:focus {
+        color: #fff;
+        text-decoration: none;
+    }
+
+.btn-default {
+    background-color: #ffffff0a;
+    border-color: #2C814D;
+    /*height: 10px;
+    width: 50px;*/
+    width: 70%;
+    max-width: 290px;
+    box-sizing: border-box;
+    font-family: Century Gothic;
+    text-align: center;
+    font-size: 18px;
+    margin-bottom: 5px;
+}
+
+.btn-saugat {
+    width: 100%;
+}
+
+.btn-default:hover {
+    background-color: #2C814D;
+}
+
+.btn-default:active, .btn-default.active, .open > .dropdown-toggle.btn-default {
+    background-color: #2C814D;
+}
+
+.navbar-inverse .navbar-brand:hover, .navbar-inverse .navbar-brand:focus {
+    background-color: #2C814D;
+}
+
+.dropdown-menu > li > a {
+    color: #fff;
+}
+
+.btn-default:hover {
+    color: gold;
+}
+
+.btn-success {
+    color: #fff;
+    background-color: #2C814D;
+}
+
+    .btn-success:hover {
+        color: gold;
+        background-color: #2C814D;
+    }
+
+.dropdown-menu > li > a:hover, .dropdown-menu > li > a:focus {
+    color: gold;
+}
+
+a:hover, a:focus {
+    color: gold;
+}
+
+.form-control {
+    background-color: rgb(250, 255, 189);
+}
+
+.navbar-inverse .btn-link:hover, .navbar-inverse .btn-link:focus {
+    color: gold;
+}
+
+a.login {
+    color: #fff;
+}
+
+    a.login:hover {
+        color: gold;
+    }

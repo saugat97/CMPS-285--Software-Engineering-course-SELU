@@ -1,0 +1,48 @@
+﻿@model LionsFeed.ViewModel.Account.LogInViewModel
+@{
+    ViewData["Title"] = "Login";
+}
+
+
+
+<div class="Layout">
+
+    @await Html.PartialAsync("LeftBar")
+
+    <div class="col-md-6">
+        <h1 style="font-family: 'Century Gothic'">Login</h1>
+        <form asp-action="Login">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="WNumber" class="control-label">W#</label>
+                <input asp-for="WNumber" class="form-control" style="border-radius:25px; border: 1px solid green; width: 400px;">
+                
+                <span asp-validation-for="WNumber" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Password" class="control-label"></label>
+                <input asp-for="Password" class="form-control" style="border-radius:25px; border: 1px solid green; width: 400px;">
+                <span asp-validation-for="Password" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <input type="submit" value="LogIn" class="btn btn-success" />
+            </div>
+        </form>
+
+        <a class="btn btn-link" asp-area="" asp-controller="Account" asp-action="ForgetPassword">Forgot Password?</a>
+    </div>
+</div>
+
+@section scripts{
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/tilt.js/1.2.1/tilt.jquery.min.js"></script>
+
+    <script type="text/javascript">
+        $('.southeastern-logo').tilt({                                         /*Cool Tilt effect on SELU Logo*/
+            glare: true,
+            maxGlare: .5
+        })
+
+    </script>
+}
+

@@ -1,0 +1,18 @@
+﻿@model LionsFeed.ViewModel.Posts.PostViewModel
+
+
+@using (Html.BeginForm("Create", "Posts"))
+{
+<div class="container" style="width:90%; margin-bottom:20px">
+    <div class="form-group">
+        @Html.TextAreaFor(m => m.PostText, new { placeholder = "Enter your text here...", @class = "form-control" })
+        @*@Html.ValidationMessageFor(m => m.PostText)*@
+        <span asp-validation-for="PostText" class="text-danger"></span>
+    </div>
+    
+    <button type="submit" class="btn btn-primary">Post</button>
+    <a asp-controller="Posts" asp-action="Upload">Upload Image</a>
+
+</div>
+
+}

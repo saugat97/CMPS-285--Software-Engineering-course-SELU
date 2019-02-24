@@ -1,0 +1,232 @@
+﻿@model LionsFeed.ViewModel.Comments.CommentsViewModel
+@{
+    ViewData["Title"] = "Comment";
+}
+
+
+<div class="col-md-6" style="padding-top:20px">
+
+    <div class="container">
+        <div style="width:40px" class="pull-left">
+            <a asp-controller="Manage" asp-action="Medium" asp-route-id="@Model.Post.ID"><img style="border-radius:50%;" src="@Model.Post.Artist.ImageUrl" height="35" width="35" /></a>
+        </div>
+        <div class="pull-left">
+            <div style="padding:0px; margin-bottom:0px">
+                <a asp-controller="Manage" asp-action="Medium" asp-route-id="@Model.Post.ID" style="color:black"><strong>@Model.Post.Artist.FirstName</strong></a>
+
+                @*Uncomment to make a small report/flag button*@
+                @*<div><a class="js-toggle-flag"><img src="flag" /></a></div>*@
+            </div>
+            <div style="font-size:x-small; color:gray">
+                <p>
+                    <span class="glyphicon glyphicon-plus-sign"></span>
+                    @Model.Post.CreatedDate.ToShortDateString()
+                    &nbsp;
+                    @Model.Post.CreatedDate.ToShortTimeString()
+                </p>
+            </div>
+        </div>
+
+
+    </div>
+    @if (!((Model.Post.PostText == "") || (Model.Post.PostText == null)))
+    {
+        <div class="container" style="border: 1px solid #129019;
+                    border-radius:5px; padding:20px; width:85%;
+                    background-color:#ffffff">
+
+
+            <div class="col-md-12" style="word-break: break-all">
+                @Model.Post.PostText
+            </div>
+
+
+        </div>
+    }
+    @if (!String.IsNullOrEmpty(Model.Post.ImageUrl))
+    {
+        <div class="col-md-12">
+
+            <div class="col-md-8" style="margin-left:25px">
+                <div style="width:400px; height:400px;overflow:hidden;position:relative; margin-top:0px">
+
+                    <img src="@Model.Post.ImageUrl" style="
+                                    position:absolute;
+                                    height:100%;
+                                    width:100%;
+                                    object-fit:cover;
+                                    border:1px solid #ddd;
+                                    border-radius:5px;
+                                    padding:5px;
+                                    " />
+
+                </div>
+            </div>
+        </div>
+
+    }
+
+    @{
+        var x = "Like";
+        if (Model.Post.LikeCount > 1)
+        {
+            x = "Likes";
+        }
+    }
+
+    @{
+        var y = "Like";
+        if (Model.Post.IsLiked)
+        {
+            y = "Unlike";
+        }
+    }
+
+    <div class="container" style="padding:5px 0px; width:85%;">
+
+        <span id="@("NumLikes"+Model.Post.ID)">@Model.Post.LikeCount </span>
+
+        <span id="@("pluralLike"+Model.Post.ID)"> @x</span>
+        <br />
+
+
+        <button id="buttonName" data-post-id="@Model.Post.ID" class="btn btn-link btn-sm js-toggle-upvote">@y</button>
+        <span style="display:inline-block; width: 350px;"></span>
+
+        <button onclick="style.display = 'none'" class="btn btn-flag js-toggle-flag">
+
+            <img src="~/images/flag.png" style="height:18px; width:18px; border:none; ">
+        </button>
+
+
+    </div>
+
+    <div>
+        <br />
+    </div>
+
+
+</div>
+<div class="col-md-6"
+     style="margin-top:30px;
+            padding-top:10px;
+            background-color: #e4e4e4;
+            border:dashed 1px grey;
+            border-radius:6px;">
+    @using (Html.BeginForm("Create", "Comments"))
+    {
+        <div class="container" style="width:90%; margin-bottom:5px; margin-top:30px">
+            <div class="form-group" style="margin-bottom:5px">
+                <textarea id="CommentText" name="CommentText" class="form-control" placeholder="Enter your comment here..."></textarea>
+                <span asp-validation-for="CommentText" class="text-danger"></span>
+            </div>
+
+            <button type="submit" class="btn btn-primary addComment" style="margin-bottom:10px">Comment</button>
+
+        </div>
+
+    }
+    @foreach (var comment in Model.Comments)
+    {
+
+        <div class="container" style="width:90%; margin-bottom:10px; margin-top:10px">
+
+            <div class="row">
+                <div class="col-md-1" style="padding:0px">
+                    <div style="padding:0px">
+                        <a asp-controller="Manage" asp-action="Medium" asp-route-id="@Model.Post.ID"><img style="border-radius:50%;" src="@comment.User.ImageUrl" height="35" width="35" /></a>
+                    </div><!-- /thumbnail -->
+                </div><!-- /col-sm-1 -->
+                <div class="col-md-10" style="padding:0px">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <a asp-controller="Manage" asp-action="Medium" asp-route-id="@Model.Post.ID" style="color:black"><strong>@comment.User.FirstName</strong></a>
+                            <span class="text-muted">
+                                commented on
+                                <span id="commentOn">@comment.CommentDate.ToString("MMM") @comment.CommentDate.ToString("d ")</span>
+                            </span>
+                        </div>
+                        <div class="panel-body">
+                            @comment.CommentText
+                        </div><!-- /panel-body -->
+                    </div><!-- /panel panel-default -->
+                </div><!-- /col-sm-5 -->
+                @*<div style="width:100%; height:40px">
+                        <div style="width:40px" class="pull-left">
+                            <a asp-controller="Manage" asp-action="Medium" asp-route-id="@Model.Post.ID"><img style="border-radius:50%;" src="@comment.User.ImageUrl" height="35" width="35" /></a>
+                        </div>
+                        <div style="width:85%">
+                            <div style="padding:0px; margin-bottom:0px">
+                                <a asp-controller="Manage" asp-action="Medium" asp-route-id="@Model.Post.ID" style="color:black"><strong>@comment.User.FirstName</strong></a>
+
+                                @*Uncomment to make a small report/flag button
+                                @*<div><a class="js-toggle-flag"><img src="flag" /></a></div>
+                            </div>
+                        </div>
+                        <div style="font-size:x-small; color:gray">
+                            <p>
+                                <span class="glyphicon glyphicon-plus-sign"></span>
+                                @comment.CommentDate.ToShortDateString()
+                                &nbsp;
+                                @comment.CommentDate.ToShortTimeString()
+                            </p>
+
+                        </div>
+                    </div>
+
+                    <div class="container" style="border: 1px solid #129019;
+                            border-radius:5px; padding:20px; width:85%;
+                            background-color:#ffffff">
+
+                        <div class="col-md-12" style="word-break: break-all">
+                            @comment.CommentText
+                        </div>
+
+                    </div>*@
+            </div>
+
+        </div>
+    }
+</div>
+
+@section Scripts{
+
+    <script>
+        $(document).ready(function () {
+
+
+            $('.addComment').on('click', function () {
+
+                var model = @Model;
+
+                $("#CommentText").val("");
+                //$(".js-empty").val("");
+
+                $.ajax({
+
+                    type: 'POST',
+                    url: '@Url.Action("Create", "Comments")',
+
+                    data: { model },
+
+                    success: function (response) {
+
+                        alert("Successful");
+
+
+                    },
+                    error: function (response) {
+                        alert('Sorry: Something Wrong');
+                    }
+
+                });
+
+
+            });
+
+
+        });
+
+    </script>
+
+}

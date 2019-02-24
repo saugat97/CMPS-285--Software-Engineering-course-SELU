@@ -1,0 +1,48 @@
+﻿@model LionsFeed.ViewModel.Manage.ProfileViewModel
+@{
+    ViewData["Title"] = "Edit Your Profile";
+
+}
+
+<h2>@ViewData["Title"]</h2>
+
+<div class="row">
+    <div class="col-md-6">
+        <form method="post" enctype="multipart/form-data">
+            <div asp-validation-summary="All" class="text-danger"></div>
+
+            <div class="form-group">
+                <label asp-for="Email"></label>
+
+                <div class="input-group">
+                    <input asp-for="Email" class="form-control" disabled />
+                    <span class="input-group-addon" aria-hidden="true"><span class="glyphicon glyphicon-ok text-success"></span></span>
+                </div>
+                <span asp-validation-for="Email" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Name"></label>
+                <input asp-for="Name" class="form-control" />
+            </div>
+
+            <div class="form-group">
+                <label asp-for="PhoneNumber">Phone Number</label>
+                <input asp-for="PhoneNumber" class="form-control" />
+                <span asp-validation-for="PhoneNumber" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <input asp-for="ImageUrl" type="file" class="form-control" />
+            </div>
+
+            <button type="submit" class="btn btn-default" style="width:100px">Save</button>&nbsp;|
+            <a asp-action="Profile">Back</a>
+
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    @await Html.PartialAsync("_ValidationScriptsPartial")
+}

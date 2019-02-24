@@ -1,0 +1,19 @@
+﻿@model LionsFeed.ViewModel.Posts.UploadViewModel
+
+@{
+    ViewData["Title"] = "Upload Image";
+}
+
+<h2>Upload Image</h2>
+
+<form method="post" enctype="multipart/form-data">
+    <div class="container" style="width:90%; margin-bottom:20px">
+        <div class="form-group">
+            <div class="form-group">
+                <input asp-for="ImageUrl" type="file" class="form-control" />
+            </div>
+        </div>
+        <button type="submit">Upload</button>
+    </div>
+
+</form>

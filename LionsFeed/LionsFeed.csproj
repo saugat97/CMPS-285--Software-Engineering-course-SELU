@@ -1,0 +1,70 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp2.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="Migrations\20180301003213_CreateUserTable.cs" />
+    <Compile Remove="Migrations\20180301003213_CreateUserTable.Designer.cs" />
+    <Compile Remove="Migrations\20180301023043_AddPost.cs" />
+    <Compile Remove="Migrations\20180301023043_AddPost.Designer.cs" />
+    <Compile Remove="Migrations\20180301023230_AddPost.cs" />
+    <Compile Remove="Migrations\20180301023230_AddPost.Designer.cs" />
+    <Compile Remove="Migrations\20180301023601_AddPost.cs" />
+    <Compile Remove="Migrations\20180301023601_AddPost.Designer.cs" />
+    <Compile Remove="Migrations\20180319163006_AddUpvotes.cs" />
+    <Compile Remove="Migrations\20180319163006_AddUpvotes.Designer.cs" />
+    <Compile Remove="Migrations\20180319164206_AddUpvotes.cs" />
+    <Compile Remove="Migrations\20180319164206_AddUpvotes.Designer.cs" />
+    <Compile Remove="Migrations\20180319164541_AddUpvotes.cs" />
+    <Compile Remove="Migrations\20180319164541_AddUpvotes.Designer.cs" />
+    <Compile Remove="Migrations\20180319164724_AddUpvotes.cs" />
+    <Compile Remove="Migrations\20180319164724_AddUpvotes.Designer.cs" />
+    <Compile Remove="Migrations\20180319164943_AddUpvotes.cs" />
+    <Compile Remove="Migrations\20180319164943_AddUpvotes.Designer.cs" />
+    <Compile Remove="Migrations\20180323021814_AddFlag.cs" />
+    <Compile Remove="Migrations\20180323021814_AddFlag.Designer.cs" />
+    <Compile Remove="Migrations\20180323021920_AddFlag.cs" />
+    <Compile Remove="Migrations\20180323021920_AddFlag.Designer.cs" />
+    <Compile Remove="Migrations\20180323022343_AddFlag.cs" />
+    <Compile Remove="Migrations\20180323022343_AddFlag.Designer.cs" />
+    <Compile Remove="Migrations\20180323022537_AddFlag.cs" />
+    <Compile Remove="Migrations\20180323022537_AddFlag.Designer.cs" />
+    <Compile Remove="Migrations\20180328151732_addIsLikedIsFlagged.cs" />
+    <Compile Remove="Migrations\20180328151732_addIsLikedIsFlagged.Designer.cs" />
+    <Compile Remove="Migrations\20180402183220_AddComment.cs" />
+    <Compile Remove="Migrations\20180402183220_AddComment.Designer.cs" />
+    <Compile Remove="Migrations\20180421213026_AddNotifications.cs" />
+    <Compile Remove="Migrations\20180421213026_AddNotifications.Designer.cs" />
+    <Compile Remove="Migrations\20180421213232_AddNotifications.cs" />
+    <Compile Remove="Migrations\20180421213232_AddNotifications.Designer.cs" />
+    <Compile Remove="Migrations\20180421213604_AddNotifications.cs" />
+    <Compile Remove="Migrations\20180421213604_AddNotifications.Designer.cs" />
+    <Compile Remove="Migrations\20180422001947_AddActorToNotification.cs" />
+    <Compile Remove="Migrations\20180422001947_AddActorToNotification.Designer.cs" />
+    <Compile Remove="Migrations\20180422002142_AddActorToNotification.cs" />
+    <Compile Remove="Migrations\20180422002142_AddActorToNotification.Designer.cs" />
+    <Compile Remove="Migrations\20180423012726_AddCommentsCountToPost.cs" />
+    <Compile Remove="Migrations\20180423012726_AddCommentsCountToPost.Designer.cs" />
+    <Compile Remove="Migrations\20180423012917_AddCommentsCountToPost.cs" />
+    <Compile Remove="Migrations\20180423012917_AddCommentsCountToPost.Designer.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="CryptoHelper" Version="3.0.1" />
+    <PackageReference Include="MailKit" Version="2.0.1" />
+    <PackageReference Include="Microsoft.AspNetCore.All" Version="2.0.5" />
+    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="2.0.2" />
+    <PackageReference Include="Moment.js" Version="2.22.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <DotNetCliToolReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Tools" Version="2.0.2" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="wwwroot\upload\post\" />
+  </ItemGroup>
+
+</Project>
